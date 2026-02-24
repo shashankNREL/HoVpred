@@ -1,8 +1,21 @@
 # HoVpred
 
+## Installation
 
-usage:
-```python
+The environment requires **Linux with CUDA 11.0**.
+
+```bash
+conda env create -f environment.yml
+conda activate hovpred
+```
+
+## Data
+
+The training data originates from NIST and DIPPR databases, which are not freely available. The CSV files in `data/` contain only the molecular identifiers (SMILES) and temperatures, with the enthalpy of vaporization values redacted. As a result, **only the prediction workflow can be reproduced** using the provided pre-trained model weights; model training and cross-validation require access to the original databases.
+
+## Usage
+
+```
 python main.py [-h] [-predict] [-watsoneq] [-K_fold] [-maxatoms MAXATOMS]
                [-lr LR] [-epoch EPOCH] [-batchsize BATCHSIZE] [-layers LAYERS]
                [-heads HEADS] [-residcon] [-explicitH] [-dropout DROPOUT]
@@ -10,8 +23,9 @@ python main.py [-h] [-predict] [-watsoneq] [-K_fold] [-maxatoms MAXATOMS]
                [-loss LOSS] [-sw_thr SW_THR] [-sw_decay SW_DECAY]
 ```
 
-optional arguments:
-```python
+Optional arguments:
+
+```
   -h, --help            show this help message and exit
   -predict              If specified, prediction is carried out
                         (default=False)
@@ -35,14 +49,17 @@ optional arguments:
                         kl_div_normal
 ```
 
+### Prediction
 
-example commands:
-```python
-# HoV prediction with uncertainty quantification - 'molecules_to_predict.csv' file is needed as an input which contains two columns: 'smiles' and 'temperature'
+Prepare a `molecules_to_predict.csv` file with two columns: `smiles` and `temperature`, then run:
+
+```bash
 python main.py -predict -modelname best_211007 -loss kl_div_normal
-
-# model training
-python main.py -modelname test_model -loss kl_div_normal
-# non-default hyperparameters can also be tested by adding more arguments
-
 ```
+
+### Training (requires NIST/DIPPR data)
+
+```bash
+python main.py -modelname test_model -loss kl_div_normal
+```
+non-default hyperparameters can also be tested by adding more arguments
