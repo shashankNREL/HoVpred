@@ -1,7 +1,25 @@
 # HoVpred
 
+## Installation
 
-usage:
+### Option A: Conda (recommended)
+
+```bash
+conda env create -f environment.yml
+conda activate hovpred
+```
+
+### Option B: pip
+
+```bash
+pip install -r requirements.txt
+```
+
+**Note:** `rdkit` is best installed via conda. The pip fallback uses `rdkit-pypi`, which
+may not be available for all platforms. If using pip and `rdkit-pypi` fails, install
+rdkit through conda instead: `conda install -c conda-forge rdkit`.
+
+## Usage:
 ```python
 python main.py [-h] [-predict] [-watsoneq] [-K_fold] [-maxatoms MAXATOMS]
                [-lr LR] [-epoch EPOCH] [-batchsize BATCHSIZE] [-layers LAYERS]

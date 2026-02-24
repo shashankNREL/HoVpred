@@ -1,0 +1,18 @@
+name: hovpred
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.8,<3.11
+  - rdkit
+  - numpy
+  - pandas
+  - scikit-learn
+  - scipy
+  - matplotlib
+  - seaborn
+  - tqdm
+  - pip
+  - pip:
+      - tensorflow>=2.4,<2.13
+      - dgl

@@ -1,0 +1,10 @@
+tensorflow>=2.4,<2.13
+dgl
+rdkit-pypi
+numpy
+pandas
+scikit-learn
+scipy
+matplotlib
+seaborn
+tqdm
