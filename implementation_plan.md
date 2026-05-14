@@ -13,7 +13,38 @@ This plan outlines the creation of a script to compute Heat of Vaporization (HoV
 
 ### Research & Setup
 
-#### [ACTION] Fix macOS Compatibility for HoVpred
+#### [TASK 1 — Priority] Load HoVpred Model Directly on macOS
+
+This is the preferred first attempt. If successful, it completely sidesteps the NPZ weight-export route and avoids Bug 4 (GATConv attention-weight collision) and Bug 5 (weight-name filter mismatches) entirely. The TF checkpoint format (`results_/best_211007/my_model.*`) stores weights as raw float arrays and is platform-agnostic — a model saved by TF 2.4.0 on Linux can be loaded by a newer TF on macOS as long as the architecture is constructed identically before calling `load_weights`.
+
+**Steps:**
+
+1. **Install a macOS-compatible DGL + TF stack.** The original `environment.yml` pins `dgl-cuda11.0=0.7.0` (Linux/CUDA only) and `tensorflow==2.4.0`. Neither runs on macOS natively. Target a CPU-only stack:
+   - `pip install tensorflow` (≥2.9 for Apple Silicon, or ≥2.10 for x86 macOS)
+   - `pip install dgl -f https://data.dgl.ai/wheels/repo.html` (CPU wheel for macOS)
+   - The DGL `libgraphbolt` error seen in `ct-env` is specific to DGL ≥1.1; DGL 0.9.x or 1.0.x CPU wheels do not include graphbolt and avoid the issue. Alternatively, pin `dgl==1.0.0` which has a stable macOS CPU wheel.
+   - Remaining dependencies (`rdkit`, `numpy`, `pandas`) are already available in the FuelLib pixi environment.
+
+2. **Verify architecture parity.** The checkpoint was created with exactly these hyperparameters (confirmed from `main.py`'s default args and `export_weights.py`):
+   ```
+   num_layers=5, num_hidden=32, num_heads=5, residual=True,
+   feat_drop=0.0, attn_drop=0.0, loss='kl_div_normal' → GAT_unc
+   ```
+   Reconstruct `GAT_unc` with these exact parameters and run one dummy forward pass (methane, `'C'`) to initialize all weight variables before loading.
+
+3. **Load the checkpoint directly:**
+   ```python
+   model.load_model('results_/best_211007/my_model')
+   ```
+   TF `load_weights` reads `.index` / `.data-00000-of-00001` files and restores by variable name. This is the same call already in `export_weights.py` and the original `main.py`; the only change is the platform.
+
+4. **Run a smoke-test prediction** on a known molecule (e.g., n-decane `CCCCCCCCCC`) and compare against the existing `molecules_to_predict_results.csv` to confirm the loaded model gives the same output as the Linux run.
+
+5. **On success:** simplify `compare_hov.py` — replace the entire `load_native_model()` function with a direct `model.load_model()` call and fix Bugs 1, 2, 3, 6, 7 listed in the bug analysis.
+
+6. **On failure** (DGL version incompatibility, `GATConv` API change, or TF checkpoint variable-name mismatch across versions): fall back to the approach in the original action below, or use the Docker container option.
+
+#### [ACTION] Fix macOS Compatibility for HoVpred (Fallback)
 - Resolve the `tensorflow` and `dgl` package issues in the `ct-env` environment. DGL seems to have an issue on Macs relating to `libgraphbolt`. We will either:
     1. Fix the local installation (try removing and reinstalling compatible DGL/TF versions).
     2. Write a script to dump the `best_211007` model weights into standard NumPy/JSON format and rebuild the `GAT_unc` class natively using standard TensorFlow ops without DGL if DGL fails.

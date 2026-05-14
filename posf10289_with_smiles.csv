@@ -18,20 +18,20 @@ Cycloaromatic-C11,2-methyl tetralin,METHYLTETRA-2,1.91,CC1CC2=CC=CC=C2CC1
 Cycloaromatic-C12,2-ethly tetralin,ETHYLTETRA-2,2.67,CCC1CC2=CC=CC=C2CC1
 Cycloaromatic-C13,2-propyl tetralin,PROPYLTETRA-2,2.27,CCCC1CC2=CC=CC=C2CC1
 Cycloaromatic-C14,2-butyl tetralin,BUTYLTETRA-2,1.22,CCCCC1CC2=CC=CC=C2CC1
-C07-Isoparaffin,2-methyl hexane,C7H16-2,0.02,CCCC(C)C
-C08-Isoparaffin,2-methyl heptane,C8H18-2,0.13,CCCCC(C)C
-C09-Isoparaffin,2-methyl octane,C9H20-2,0.48,CCCCCC(C)C
-C10-Isoparaffin,2-methyl nonane,C10H22-2,1.66,CCCCCCC(C)C
-C11-Isoparaffin,2-methyl decane,C11H24-2,2.73,CCCCCCCC(C)C
-C12-Isoparaffin,2-methyl undecane,C12H26-2,3.36,CCCCCCCCC(C)C
-C13-Isoparaffin,2-methyl dodecane,C13H28-2,3.57,CCCCCCCCCC(C)C
-C14-Isoparaffin,2-methyl tridecane,C14H30-2,3.54,CCCCCCCCCCC(C)C
-C15-Isoparaffin,2-methyl tetradecane,C15H32-2,2.7,CCCCCCCCCCCC(C)C
-C16-Isoparaffin,2-methyl pentadecane,C16H34-2,0.65,CCCCCCCCCCCCC(C)C
-C17-Isoparaffin,2-methyl hexadecane,C17H36-2,0.08,CCCCCCCCCCCCCC(C)C
-C18-Isoparaffin,2-methyl heptadecane,C18H38-2,0.0,CCCCCCCCCCCCCCC(C)C
-C19-Isoparaffin,2-methyl octadecane,C19H40-2,0.0,CCCCCCCCCCCCCCCC(C)C
-C20-Isoparaffin,2-methyl nonadecane,C20H42-2,0.0,CCCCCCCCCCCCCCCCC(C)C
+C07-Isoparaffin,2-methyl hexane,C7H16-2,0.02,CCCCC(C)C
+C08-Isoparaffin,2-methyl heptane,C8H18-2,0.13,CCCCCC(C)C
+C09-Isoparaffin,2-methyl octane,C9H20-2,0.48,CCCCCCC(C)C
+C10-Isoparaffin,2-methyl nonane,C10H22-2,1.66,CCCCCCCC(C)C
+C11-Isoparaffin,2-methyl decane,C11H24-2,2.73,CCCCCCCCC(C)C
+C12-Isoparaffin,2-methyl undecane,C12H26-2,3.36,CCCCCCCCCC(C)C
+C13-Isoparaffin,2-methyl dodecane,C13H28-2,3.57,CCCCCCCCCCC(C)C
+C14-Isoparaffin,2-methyl tridecane,C14H30-2,3.54,CCCCCCCCCCCC(C)C
+C15-Isoparaffin,2-methyl tetradecane,C15H32-2,2.7,CCCCCCCCCCCCC(C)C
+C16-Isoparaffin,2-methyl pentadecane,C16H34-2,0.65,CCCCCCCCCCCCCC(C)C
+C17-Isoparaffin,2-methyl hexadecane,C17H36-2,0.08,CCCCCCCCCCCCCCC(C)C
+C18-Isoparaffin,2-methyl heptadecane,C18H38-2,0.0,CCCCCCCCCCCCCCCC(C)C
+C19-Isoparaffin,2-methyl octadecane,C19H40-2,0.0,CCCCCCCCCCCCCCCCC(C)C
+C20-Isoparaffin,2-methyl nonadecane,C20H42-2,0.0,CCCCCCCCCCCCCCCCCC(C)C
 n-C07,n-heptane,NC7H16,0.02,CCCCCCC
 n-C08,n-octane,NC8H18,0.19,CCCCCCCC
 n-C09,n-nonane,NC9H20,0.64,CCCCCCCCC
